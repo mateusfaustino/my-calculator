@@ -18,7 +18,9 @@ export default class Calculator extends Component{
     }
 
     setOparation(operation){
-        console.log(operation)
+        if(this.state.current===0){
+            this.setState({operation, current: 1,clearDisplay:true})
+        }
     }
 
     addDigitOnDisplay(pressedDigit){
@@ -31,6 +33,14 @@ export default class Calculator extends Component{
         const currentValue = isDisplayClean ? '' : this.state.displayValue
         const displayValue = currentValue + pressedDigit
         this.setState({displayValue, clearDisplay:false})
+
+        if(pressedDigit!=='.'){
+            const i = this.state.current
+            const newValue = parseFloat(displayValue)
+            const values = [...this.state.values]
+            values[i] = newValue
+            this.setState({values})
+        }
         
         
     }
