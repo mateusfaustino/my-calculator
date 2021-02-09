@@ -1,0 +1,19 @@
+@font-face{
+  font-family: "SFProDisplay";
+  src: url('./fonts/FontsFree-Net-SFProDisplay-Regular.ttf');
+}
+
+*{
+  font-family: "SFProDisplay",monospace;
+}
+
+body{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(to right, #cacaca,#fff);
+  padding: 10%;
+}
+

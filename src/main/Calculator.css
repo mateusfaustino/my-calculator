@@ -1,0 +1,47 @@
+:root{
+    --color-light:#FFFFFF;
+    --color-dark: #1F1F1F;
+    --color-orange:#EF7303;
+
+}
+
+.calculator{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 812px;
+    padding: 24px;
+    
+    box-shadow: none;
+    background: var(--color-light);
+    
+}
+#operation-buttons-column{
+    background: linear-gradient(0deg, #F5F5F5, #F5F5F5);
+    border-radius: 18px;
+}
+
+.operation{
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 34px;
+    line-height: 41px;
+    text-align: center; 
+    letter-spacing: 0.02em;
+    color: #1F1F1F;
+}
+
+.key-board{
+    display: flex;
+    flex-direction: row;
+    border-top: solid 0.5px #cccccccc;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+.numbers-column{
+    display: flex;
+    flex-direction: column;
+}
