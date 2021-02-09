@@ -8,7 +8,7 @@ const initialState = {
     displayValue:'0',
     clearDisplay:false,
     operation:null,
-    values:[0,0],
+    values:[0,0],//operands
     currentValue:0
 };
 export default class Calculator extends Component{
@@ -28,19 +28,32 @@ export default class Calculator extends Component{
         if(pressedDigit==='.' && this.state.displayValue.includes('.')){
             return
         }
-        
-        const isDisplayClean = this.state.displayValue ==='0' || this.state.clearDisplay
-        const currentValue = isDisplayClean ? '' : this.state.displayValue
-        const displayValue = currentValue + pressedDigit
-        this.setState({displayValue, clearDisplay:false})
+        if(pressedDigit==='.' && this.state.displayValue=='0'){
+            this.state.displayValue ='0'
+            const currentValue = this.state.displayValue
+            const displayValue = currentValue + pressedDigit
+            this.setState({displayValue, clearDisplay:false})
 
-        if(pressedDigit!=='.'){
-            const i = this.state.current
-            const newValue = parseFloat(displayValue)
-            const values = [...this.state.values]
-            values[i] = newValue
-            this.setState({values})
+        }else{
+            const isDisplayClean = this.state.displayValue ==='0' || this.state.clearDisplay
+            const currentValue = isDisplayClean ? '' : this.state.displayValue
+            const displayValue = currentValue + pressedDigit
+            this.setState({displayValue, clearDisplay:false})
+
+            if(pressedDigit!=='.'){
+                const i = this.state.currentValue
+                console.log("i: ",this.state.currentValue)
+                const newValue = parseFloat(displayValue)
+                const values = [...this.state.values]//operands 
+                values[i] = newValue
+                this.setState({values})//operands 
+                console.log("values: ",values)
+                console.log("this.state.values: ",this.state.values)
+            }    
         }
+        
+
+        
         
         
     }
