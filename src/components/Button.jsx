@@ -10,7 +10,10 @@ export default props =>{
     classes += props.buttonClass == 'percentage' ? 'percentage ' : ""
     classes += props.buttonClass == 'equal' ? 'equal ' : ""
     
+    
+    
     return(
+        
         <button onClick={e=>props.click && props.click(props.label)}
         
         

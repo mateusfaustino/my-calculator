@@ -18,8 +18,50 @@ export default class Calculator extends Component{
     }
 
     setOparation(operation){
-        if(this.state.current===0){
-            this.setState({operation, current: 1,clearDisplay:true})
+        
+        if (operation=='÷'||operation=='×'){
+            operation = operation=='÷'? '/':'*' 
+        }
+        
+        console.log("this.state.currentValue ",this.state.currentValue)
+        if(this.state.currentValue===0){
+            
+            this.setState({operation, currentValue: 1,clearDisplay:true})
+
+            console.log("operation: ",this.state.operation)
+            console.log("novo currentValue: ",this.state.currentValue)
+            console.log("clearDisplay: ",this.state.clearDisplay)
+
+        }else{
+            const wasEqualsPressed = operation==='='
+            console.log("wasEqualsPressed ",wasEqualsPressed)
+
+            const currentOperation = this.state.operation
+
+            const values = [...this.state.values]
+            if(currentOperation==='+'){
+                
+                values[0]= values[0]+values[1]
+
+            }else if(currentOperation==='-'){
+                
+                values[0]= values[0]-values[1]  
+
+            }else if(currentOperation=='*'){
+                values[0]= values[0]*values[1]
+
+            }else if(currentOperation=='/'){
+                values[0]= values[0]/values[1]    
+            }
+            values[1]=0
+            
+            this.setState({
+                displayValue:values[0],
+                operation: wasEqualsPressed ? null : operation,
+                currentOperation: wasEqualsPressed ? 0:1,
+                clearDisplay:!wasEqualsPressed,
+                values
+            })
         }
     }
 
@@ -48,7 +90,6 @@ export default class Calculator extends Component{
                 values[i] = newValue
                 this.setState({values})//operands 
                 console.log("values: ",values)
-                console.log("this.state.values: ",this.state.values)
             }    
         }
         
@@ -90,7 +131,7 @@ export default class Calculator extends Component{
                     <div className="numbers-column " id="operation-buttons-column">
                         <Button buttonClass="operation" label="÷" click={setOparation} />
                         <Button buttonClass="operation" label="×" click={setOparation}/>
-                        <Button buttonClass="operation" label="–" click={setOparation}/>
+                        <Button buttonClass="operation" label="-" click={setOparation}/>
                         <Button buttonClass="operation" label="+" click={setOparation}/>    
                         <Button buttonClass="equal" label="=" click={setOparation} />    
                     </div>
