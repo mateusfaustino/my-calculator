@@ -6,11 +6,15 @@
 }
 
 .calculator{
+    position:absolute;
+    left:50%;
+    transform: translateX(-50%);
+    top:0;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
-    height: 812px;
+    min-height: 90%;
     padding: 24px;
     
     box-shadow: none;
@@ -25,11 +29,30 @@
 .darkTheme{
     background: var(--color-dark);
 }
+.darkTheme #operation-buttons-column{
+    background: linear-gradient(0deg, #282828, #282828);
+    
+}
 #operation-buttons-column{
     background: linear-gradient(0deg, #F5F5F5, #F5F5F5);
     border-radius: 18px;
 }
-
+.themeButton button{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    left: 31px;
+    top: 60px;
+    font-size: 10px;
+    background-color: transparent;
+    border-radius: 100%;
+    border: solid #1F1F1F 1px;
+}
+.darkTheme .themeButton button{
+    color: #FFFFFF;
+    border-radius: 100%;
+    border: solid #FFFFFF 1px;
+}
 .operation{
     font-family: SF Pro Display;
     font-style: normal;

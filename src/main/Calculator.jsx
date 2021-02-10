@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './Calculator.css'
 import Button from '../components/Button'
 import Display from '../components/Display'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAdjust,faBackspace } from '@fortawesome/free-solid-svg-icons'
+
 
 const initialState = {
     displayValue:'0',
@@ -115,8 +118,15 @@ export default class Calculator extends Component{
         const setOparation = operation => this.setOparation(operation)
         const addDigitOnDisplay = pressedDigit => this.addDigitOnDisplay(pressedDigit)
         const calculatorClass = this.state.darkTheme? 'calculator darkTheme':'calculator lightTheme '
+        const deleteIcon = <FontAwesomeIcon icon={faBackspace} />
+        const themeIcon = <FontAwesomeIcon icon={faAdjust} />
+        
         return(
+            
             <div className={calculatorClass}>
+                <div className="themeButton">
+                    <button onClick={()=>this.setTheme()}>{themeIcon} </button>
+                </div>
                 <Display value={this.state.displayValue}/>
                 <div className="key-board">
                     <div className="numbers-column">
@@ -127,7 +137,7 @@ export default class Calculator extends Component{
                     </div>
                     <div className="numbers-column">
                     
-                        <Button buttonClass="orange-label" label=".." click={()=>this.setTheme()} />
+                        <Button buttonClass="orange-label" label={deleteIcon} />
                         <Button buttonClass="number" label="8" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="5" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="2" click={addDigitOnDisplay} />    
