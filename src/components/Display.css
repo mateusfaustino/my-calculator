@@ -7,11 +7,20 @@
     line-height: 57px;
     text-align: right;
     letter-spacing: 0.02em;
-    color: #1F1F1F;
+    
     flex: none;
     overflow:hidden;
     flex-grow: 0;
     margin: 8px 0px;
     overflow:hidden;
-    
+}
+
+.lightTheme>.display{
+    color: #1F1F1F;
+    background:#ffffff;
+}
+
+.darkTheme>.display{
+    color: #ffffff ;
+    background:#1F1F1F;
 }

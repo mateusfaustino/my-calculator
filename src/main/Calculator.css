@@ -14,8 +14,16 @@
     padding: 24px;
     
     box-shadow: none;
-    background: var(--color-light);
     
+    
+}
+
+.lightTheme{
+    background: var(--color-light);
+}
+
+.darkTheme{
+    background: var(--color-dark);
 }
 #operation-buttons-column{
     background: linear-gradient(0deg, #F5F5F5, #F5F5F5);

@@ -9,12 +9,22 @@ const initialState = {
     clearDisplay:false,
     operation:null,
     values:[0,0],//operands
-    currentValue:0
+    currentValue:0,
+    darkTheme:false
 };
 export default class Calculator extends Component{
     state = {...initialState}
+    setTheme(){
+        if (this.state.darkTheme==true){
+            this.setState({darkTheme:false})
+        }else{
+            this.setState({darkTheme:true})
+        }
+    }
     clearMemory(){
+        const currentDarkTheme = this.state.darkTheme
         this.setState({...initialState})
+        this.setState({darkTheme:currentDarkTheme})
     }
 
     setOparation(operation){
@@ -67,6 +77,8 @@ export default class Calculator extends Component{
 
     addDigitOnDisplay(pressedDigit){
         console.log(pressedDigit)
+        const Theme = this.state.darkTheme? 'Dark':'Light'
+        console.log("Theme: ", Theme)
         if(pressedDigit==='.' && this.state.displayValue.includes('.')){
             return
         }
@@ -99,10 +111,12 @@ export default class Calculator extends Component{
         
     }
     render(){
+        
         const setOparation = operation => this.setOparation(operation)
         const addDigitOnDisplay = pressedDigit => this.addDigitOnDisplay(pressedDigit)
+        const calculatorClass = this.state.darkTheme? 'calculator darkTheme':'calculator lightTheme '
         return(
-            <div className="calculator">
+            <div className={calculatorClass}>
                 <Display value={this.state.displayValue}/>
                 <div className="key-board">
                     <div className="numbers-column">
@@ -113,7 +127,7 @@ export default class Calculator extends Component{
                     </div>
                     <div className="numbers-column">
                     
-                        <Button buttonClass="orange-label" label=".." />
+                        <Button buttonClass="orange-label" label=".." click={()=>this.setTheme()} />
                         <Button buttonClass="number" label="8" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="5" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="2" click={addDigitOnDisplay} />    
