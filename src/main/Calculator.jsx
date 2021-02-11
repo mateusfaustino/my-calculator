@@ -58,9 +58,9 @@ export default class Calculator extends Component{
         this.setState({...initialState})
         this.setState({darkTheme:currentDarkTheme,listOfLastOperations:currentlistOfLastOperations})
     }
-    saveOperationInListOfLastOperations(currentCalculus){
+    saveOperationInListOfLastOperations(currentCalculation){
         const currentListOfLastOperations = this.state.listOfLastOperations
-        currentListOfLastOperations.push(currentCalculus)
+        currentListOfLastOperations.push(currentCalculation)
         this.setState({listOfLastOperations:currentListOfLastOperations})
         
     }
@@ -73,8 +73,9 @@ export default class Calculator extends Component{
             values[0]= values[0]*values[1]
         }else if(currentOperation=='/'){
             values[0]= values[0]/values[1]    
+        }else if(currentOperation=='%'){
+            values[0]= (values[0]/100)*values[1]
         }
-
         values[1]=0
         return values[0]
     }
@@ -100,12 +101,14 @@ export default class Calculator extends Component{
         }else{
             const currentOperation = this.state.operation
             const values = [...this.state.values]
-            const currentCalculus={
+            const currentCalculation={
                 firstValue:values[0], secondValue:values[1], operation:currentOperation, result:''
             }
             values[0] = this.calculateValues(values,currentOperation)          
-            currentCalculus.result= values[0]
-            this.saveOperationInListOfLastOperations(currentCalculus)
+            currentCalculation.result= values[0]
+
+            this.saveOperationInListOfLastOperations(currentCalculation)
+
             this.setState({
                 displayValue:values[0],
                 operation: operation,
@@ -191,7 +194,7 @@ export default class Calculator extends Component{
                         <Button buttonClass="number" label="0" click={addDigitOnDisplay} />    
                     </div>
                     <div className="numbers-column">
-                        <Button buttonClass="percentage" label="%" />
+                        <Button buttonClass="percentage" label="%" click={pressOperation} />
                         <Button buttonClass="number" label="9" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="6" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="3" click={addDigitOnDisplay} />    

@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# Calculadora Web
+## Essa Aplicação foi feita com o React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
