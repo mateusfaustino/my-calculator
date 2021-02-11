@@ -16,7 +16,7 @@ const initialState = {
     values:[0,0],
     currentValue:0,
     darkTheme:false,
-    history:[
+    listOfLastOperations:[
         {firstValue:'', secondValue:'', operation:'', result:''},
         {firstValue:'', secondValue:'', operation:'', result:''},
         {firstValue:'', secondValue:'', operation:'', result:''},
@@ -54,12 +54,15 @@ export default class Calculator extends Component{
     }
     clearAllMemory(){
         const currentDarkTheme = this.state.darkTheme
-        const currentHistory = this.state.history
+        const currentlistOfLastOperations = this.state.listOfLastOperations
         this.setState({...initialState})
-        this.setState({darkTheme:currentDarkTheme,history:currentHistory})
+        this.setState({darkTheme:currentDarkTheme,listOfLastOperations:currentlistOfLastOperations})
     }
-    saveOperationInHistory(currentCalculus){
-       const currentHistory = [...this.state.history] 
+    saveOperationInListOfLastOperations(currentCalculus){
+        const currentListOfLastOperations = this.state.listOfLastOperations
+        currentListOfLastOperations.push(currentCalculus)
+        this.setState({listOfLastOperations:currentListOfLastOperations})
+        
     }
     calculateValues(values,currentOperation){
         if (currentOperation==='+'){
@@ -97,20 +100,18 @@ export default class Calculator extends Component{
         }else{
             const currentOperation = this.state.operation
             const values = [...this.state.values]
-            const currentCalculus={firstValue:values[0], secondValue:values[1], operation:currentOperation, result:''}
-            const currentListOfHistories = this.state.history
-            values[0] = this.calculateValues(values,currentOperation)
-            
+            const currentCalculus={
+                firstValue:values[0], secondValue:values[1], operation:currentOperation, result:''
+            }
+            values[0] = this.calculateValues(values,currentOperation)          
             currentCalculus.result= values[0]
-            currentListOfHistories.push(currentCalculus)
-
+            this.saveOperationInListOfLastOperations(currentCalculus)
             this.setState({
                 displayValue:values[0],
                 operation: operation,
                 currentOperation:1,
                 clearDisplay:true,
                 values,
-                history:currentListOfHistories
             })
             
         }
@@ -174,7 +175,7 @@ export default class Calculator extends Component{
                 <div className="themeButton">
                     <img onClick={()=>this.setTheme()} src={themeIcon} className="theme-icon" alt="icon" />
                 </div>
-                <Display className="display-component" value={this.state.displayValue} list={this.state.history} />
+                <Display className="display-component" value={this.state.displayValue} listOfLastOperations={this.state.listOfLastOperations} />
                 <div className="key-board">
                     <div className="numbers-column">
                         <Button buttonClass="orange-label" click={()=>this.clearAllMemory()} label={cIconImage} />

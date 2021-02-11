@@ -2,7 +2,7 @@ import React from 'react'
 import './Display.css'
 export default props =>{
    
-    const listOfOperations = props.list
+    const listOfOperations = props.listOfLastOperations
     const lastItemOfArray= listOfOperations.length-1
     
     const lastOperation1 = listOfOperations[lastItemOfArray].firstValue + listOfOperations[lastItemOfArray].operation + listOfOperations[lastItemOfArray].secondValue 
