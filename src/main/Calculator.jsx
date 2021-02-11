@@ -15,7 +15,14 @@ const initialState = {
     operation:null,
     values:[0,0],
     currentValue:0,
-    darkTheme:false
+    darkTheme:false,
+    history:[
+        {firstValue:'', secondValue:'', operation:'', result:''},
+        {firstValue:'', secondValue:'', operation:'', result:''},
+        {firstValue:'', secondValue:'', operation:'', result:''},
+        {firstValue:'', secondValue:'', operation:'', result:''}
+    ]
+    
 }
 function convertValueToString (valueForBeConvertedToString) {
         const convertedValue = String(valueForBeConvertedToString)
@@ -47,46 +54,71 @@ export default class Calculator extends Component{
     }
     clearAllMemory(){
         const currentDarkTheme = this.state.darkTheme
+        const currentHistory = this.state.history
         this.setState({...initialState})
-        this.setState({darkTheme:currentDarkTheme})
+        this.setState({darkTheme:currentDarkTheme,history:currentHistory})
     }
-    setOparation(operation){
+    saveOperationInHistory(currentCalculus){
+       const currentHistory = [...this.state.history] 
+    }
+    calculateValues(values,currentOperation){
+        if (currentOperation==='+'){
+            values[0]= values[0]+values[1]
+        }else if(currentOperation==='-'){  
+            values[0]= values[0]-values[1]  
+        }else if(currentOperation=='*'){
+            values[0]= values[0]*values[1]
+        }else if(currentOperation=='/'){
+            values[0]= values[0]/values[1]    
+        }
+
+        values[1]=0
+        return values[0]
+    }
+    pressEqual(){
+        if (this.state.currentValue===0){ 
+            return
+        }else {
+            const currentOperation = this.state.operation
+            this.pressOperation(currentOperation)
+            this.setState({
+                operation: null,
+                currentValue:0,
+                clearDisplay:false,
+            })    
+        }
+    }
+    pressOperation(operation){
         if (operation=='÷'||operation=='×'){
             operation = operation=='÷'? '/':'*' 
         }
         if (this.state.currentValue===0){ 
             this.setState({operation, currentValue: 1,clearDisplay:true})
         }else{
-            const wasEqualsPressed = operation==='='
+            
             const currentOperation = this.state.operation
             const values = [...this.state.values]
-
-            if (currentOperation==='+'){
-                values[0]= values[0]+values[1]
-            }else if(currentOperation==='-'){  
-                values[0]= values[0]-values[1]  
-            }else if(currentOperation=='*'){
-                values[0]= values[0]*values[1]
-            }else if(currentOperation=='/'){
-                values[0]= values[0]/values[1]    
-            }
-
-            values[1]=0
+            const currentCalculus={firstValue:values[0], secondValue:values[1], operation:currentOperation, result:''}
+            const currentListOfHistories = this.state.history
+            values[0] = this.calculateValues(values,currentOperation)
             
+            currentCalculus.result= values[0]
+            currentListOfHistories.push(currentCalculus)
+
             this.setState({
                 displayValue:values[0],
-                operation: wasEqualsPressed ? null : operation,
-                currentOperation: wasEqualsPressed ? 0:1,
-                clearDisplay:!wasEqualsPressed,
-                values
+                operation: operation,
+                currentOperation:1,
+                clearDisplay:true,
+                values,
+                history:currentListOfHistories
             })
+            
         }
     }
 
     addDigitOnDisplay(pressedDigit){
-        console.log(pressedDigit)
-        const Theme = this.state.darkTheme? 'Dark':'Light'
-        console.log("Theme: ", Theme)
+        
         if(pressedDigit==='.' && this.state.displayValue.includes('.')){
             return
         }
@@ -104,16 +136,13 @@ export default class Calculator extends Component{
             
             if(pressedDigit!=='.'){
                 const i = this.state.currentValue
-                console.log("i: ",this.state.currentValue)
                 const newValue = parseFloat(displayValue)
-                const values = [...this.state.values]//operands 
+                const values = [...this.state.values] 
                 values[i] = newValue
-                this.setState({values})//operands 
-                console.log("values: ",values)
+                this.setState({values})
             }    
         }    
     }
-
     deleteDigit(){
         if (this.state.displayValue.length==1 && this.state.currentValue==1 ){
             this.clearSecondValueMemory()
@@ -122,22 +151,18 @@ export default class Calculator extends Component{
                 this.clearAllMemory()
                 return
         }else{
-            console.log("Digito deletado")
             const currentDisplayValue = this.state.displayValue
             const truncatedString = truncateString(currentDisplayValue,currentDisplayValue.length-1)
             this.setState({displayValue:truncatedString})
             const i = this.state.currentValue
             const newValue = parseFloat(truncatedString)
-            console.log("new Value: ",newValue)
             const values = [...this.state.values]
             values[i] = newValue
-            this.setState({values}) 
-            console.log("new value: ",values[i])
-            console.log("Truncated Value: ",truncatedString)
+            this.setState({values})
         }
     }
     render(){   
-        const setOparation = operation => this.setOparation(operation)
+        const pressOperation = operation => this.pressOperation(operation)
         const addDigitOnDisplay = pressedDigit => this.addDigitOnDisplay(pressedDigit)
         const calculatorClass = this.state.darkTheme? 'calculator darkTheme':'calculator lightTheme '
         const themeIcon = this.state.darkTheme? darkThemeIcon : lightThemeIcon
@@ -146,12 +171,14 @@ export default class Calculator extends Component{
         const deleteIconImage = <img  src={deleteIconLink} className="theme-icon"/>
         const cIconImage = <img  src={cIconLink} className="theme-icon"/>
         
+        
+        
         return(
             <div className={calculatorClass}>
                 <div className="themeButton">
                     <img onClick={()=>this.setTheme()} src={themeIcon} className="theme-icon" alt="icon" />
                 </div>
-                <Display value={this.state.displayValue}/>
+                <Display value={this.state.displayValue} list={this.state.history} />
                 <div className="key-board">
                     <div className="numbers-column">
                         <Button buttonClass="orange-label" click={()=>this.clearAllMemory()} label={cIconImage} />
@@ -174,11 +201,11 @@ export default class Calculator extends Component{
                         <Button buttonClass="number" label="." click={addDigitOnDisplay} />    
                     </div>
                     <div className="numbers-column " id="operation-buttons-column">
-                        <Button buttonClass="operation" label="÷" click={setOparation} />
-                        <Button buttonClass="operation" label="×" click={setOparation}/>
-                        <Button buttonClass="operation" label="-" click={setOparation}/>
-                        <Button buttonClass="operation" label="+" click={setOparation}/>    
-                        <Button buttonClass="equal" label="=" click={setOparation} />    
+                        <Button buttonClass="operation" label="÷" click={pressOperation} />
+                        <Button buttonClass="operation" label="×" click={pressOperation}/>
+                        <Button buttonClass="operation" label="-" click={pressOperation}/>
+                        <Button buttonClass="operation" label="+" click={pressOperation}/>    
+                        <Button buttonClass="equal" label="=" click={()=>this.pressEqual()} />    
                     </div>
                 </div>
             </div>
