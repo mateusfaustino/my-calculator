@@ -15,12 +15,51 @@
     overflow:hidden;
 }
 
+.display-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.display-container .last-operation{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-align: right;
+    margin-bottom: 0.02em;
+}
+.last-operation1{
+    
+    font-size: 28px;
+    line-height: 33px;
+    color: #515151;
+    
+}
+.last-operation2{
+    font-size: 18px;
+    line-height: 21px;
+    color: #CCCCCC;
+    
+}
+.last-operation3{
+    font-size: 18px;
+    line-height: 21px;
+    color: #CCCCCC;
+}
+.last-operation4{
+    font-size: 18px;
+    line-height: 21px;
+    color: #CCCCCC;
+}
+
 .lightTheme>.display{
     color: #1F1F1F;
     background:#ffffff;
 }
 
-.darkTheme>.display{
+.darkTheme>.display-container>.display{
     color: #ffffff ;
     background:#1F1F1F;
 }
