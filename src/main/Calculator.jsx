@@ -95,7 +95,6 @@ export default class Calculator extends Component{
         if (this.state.currentValue===0){ 
             this.setState({operation, currentValue: 1,clearDisplay:true})
         }else{
-            
             const currentOperation = this.state.operation
             const values = [...this.state.values]
             const currentCalculus={firstValue:values[0], secondValue:values[1], operation:currentOperation, result:''}
@@ -116,7 +115,6 @@ export default class Calculator extends Component{
             
         }
     }
-
     addDigitOnDisplay(pressedDigit){
         
         if(pressedDigit==='.' && this.state.displayValue.includes('.')){
@@ -170,15 +168,13 @@ export default class Calculator extends Component{
         const deleteIconLink = this.state.darkTheme? darkDeleteIcon : lightDeleteIcon
         const deleteIconImage = <img  src={deleteIconLink} className="theme-icon"/>
         const cIconImage = <img  src={cIconLink} className="theme-icon"/>
-        
-        
-        
+         
         return(
             <div className={calculatorClass}>
                 <div className="themeButton">
                     <img onClick={()=>this.setTheme()} src={themeIcon} className="theme-icon" alt="icon" />
                 </div>
-                <Display value={this.state.displayValue} list={this.state.history} />
+                <Display className="display-component" value={this.state.displayValue} list={this.state.history} />
                 <div className="key-board">
                     <div className="numbers-column">
                         <Button buttonClass="orange-label" click={()=>this.clearAllMemory()} label={cIconImage} />

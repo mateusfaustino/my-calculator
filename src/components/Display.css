@@ -7,14 +7,12 @@
     line-height: 57px;
     text-align: right;
     letter-spacing: 0.02em;
-    
     flex: none;
     overflow:hidden;
     flex-grow: 0;
-    margin: 8px 0px;
+    margin-bottom: 16px;
     overflow:hidden;
 }
-
 .display-container{
     display: flex;
     flex-direction: column;
@@ -28,38 +26,65 @@
     font-weight: 500;
     letter-spacing: 0.02em;
     text-align: right;
-    margin-bottom: 0.02em;
-}
-.last-operation1{
     
+}
+.last-operation1{   
     font-size: 28px;
     line-height: 33px;
     color: #515151;
-    
+    margin-bottom: 8px;
+}
+.darkTheme .last-operation1{   
+    font-size: 28px;
+    line-height: 33px;
+    color: #AAAAAAAA;
+    margin-bottom: 8px;
 }
 .last-operation2{
     font-size: 18px;
     line-height: 21px;
     color: #CCCCCC;
-    
+    margin-bottom: 32px;
+}
+.darkTheme .last-operation2{
+    color: #6E6E6E;
 }
 .last-operation3{
     font-size: 18px;
     line-height: 21px;
     color: #CCCCCC;
+    margin-bottom: 20px;
 }
+.darkTheme .last-operation3{
+    color: #6E6E6E;
+ }
 .last-operation4{
     font-size: 18px;
     line-height: 21px;
     color: #CCCCCC;
+    margin-bottom: 20px;
 }
-
-.lightTheme>.display{
+.darkTheme .last-operation4{
+    color:#6E6E6E;
+}
+.lightTheme .display{
     color: #1F1F1F;
     background:#ffffff;
 }
-
-.darkTheme>.display-container>.display{
+.darkTheme .display{
+    color: #ffffff ;
     color: #ffffff ;
     background:#1F1F1F;
+}
+.topRetangle{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 605px;
+    z-index: 1;
+    background: linear-gradient(180deg, #FFFFFF 39.88%, rgba(255, 255, 255, 0) 100%);
+}
+.darkTheme .topRetangle{
+    background: linear-gradient(180deg, #1F1F1F 39.88%, rgba(31, 31, 31, 0) 100%);
 }

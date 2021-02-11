@@ -1,7 +1,5 @@
 .button{
     padding: 16px 36px;
-
-
     font-family: SF Pro Display;
     font-style: normal;
     font-weight: normal;
@@ -14,29 +12,22 @@
     color: #1F1F1F;
     background: transparent;
 }
-
 .darkTheme .number, .darkTheme .operation,.darkTheme .percentage{
     color:#ffffff;
-        
 }
 .darkTheme .number:active, .darkTheme .operation:active,.darkTheme .percentage:active,.darkTheme .orange-label:active{
-    background: #000000;
-        
+    background: #000000;       
 }
-
 .darkTheme .orange-label{
     color:#FF762D;
 }
 .darkTheme .equal{
     background-color:#FF762D;
 }
-
 .button:active{
     background: #d4d3d3;
 }
-
-.orange-label{
-    
+.orange-label{   
     font-family: SF Pro Display;
     font-style: normal;
     font-weight: normal;
@@ -46,7 +37,6 @@
     letter-spacing: 0.02em;
     color: #EF7303;
 }
-
 .equal{
     background: #EF7303;
     color:#ffffff;
@@ -55,8 +45,7 @@
     font-size: 34px;
     line-height: 41px;
     text-align: center;
-    letter-spacing: 0.02em;
-    
+    letter-spacing: 0.02em;   
 }
 .equal:active{
     background: #a04c02;

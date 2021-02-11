@@ -38,6 +38,7 @@
     font-size: 10px;
     background-color: transparent;
     border-radius: 100%;
+    z-index: 5;
 }
 .darkTheme .themeButton img{
     color: #FFFFFF;

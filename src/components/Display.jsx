@@ -5,15 +5,15 @@ export default props =>{
     const listOfOperations = props.list
     const lastItemOfArray= listOfOperations.length-1
     
-    const lastOperation1 = listOfOperations[lastItemOfArray].firstValue + '+' + listOfOperations[lastItemOfArray].secondValue 
+    const lastOperation1 = listOfOperations[lastItemOfArray].firstValue + listOfOperations[lastItemOfArray].operation + listOfOperations[lastItemOfArray].secondValue 
         
-    const lastOperation2 = listOfOperations[lastItemOfArray-1].firstValue + '+' + listOfOperations[lastItemOfArray-1].secondValue
+    const lastOperation2 = listOfOperations[lastItemOfArray-1].firstValue + listOfOperations[lastItemOfArray-1].operation + listOfOperations[lastItemOfArray-1].secondValue
     const lastResult2 = listOfOperations[lastItemOfArray-1].result
 
-    const lastOperation3 = listOfOperations[lastItemOfArray-2].firstValue + '+' + listOfOperations[lastItemOfArray-2].secondValue
+    const lastOperation3 = listOfOperations[lastItemOfArray-2].firstValue + listOfOperations[lastItemOfArray-2].operation + listOfOperations[lastItemOfArray-2].secondValue
     const lastResult3 = listOfOperations[lastItemOfArray-2].result
 
-    const lastOperation4 = listOfOperations[lastItemOfArray-3].firstValue + '+' + listOfOperations[lastItemOfArray-3].secondValue
+    const lastOperation4 = listOfOperations[lastItemOfArray-3].firstValue + listOfOperations[lastItemOfArray-3].operation  + listOfOperations[lastItemOfArray-3].secondValue
     const lastResult4 = listOfOperations[lastItemOfArray-3].result
     
     console.log("list", listOfOperations)
@@ -35,7 +35,7 @@ export default props =>{
             <div className="last-operation last-operation1">
                 <h2>{lastOperation1}</h2>
             </div>
-
+            <div className="topRetangle"></div>
             <div className="display">={props.value}</div>
         </div>    
     )
