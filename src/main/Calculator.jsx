@@ -15,6 +15,20 @@ const initialState = {
     currentValue:0,
     darkTheme:false
 };
+function truncateString(string, numberOfDigits) {
+    if (typeof string != 'string'){
+        console.log("String é diferente de string")
+        const newString=String(string)
+        string = newString
+        console.log("new string: ", string)
+       
+    }
+    console.log("type of string: ", typeof string)
+        const truncatedString = string.slice(0,numberOfDigits)
+        console.log("truncated String: ", truncatedString)
+        return truncatedString;
+}
+    
 export default class Calculator extends Component{
     state = {...initialState}
     setTheme(){
@@ -106,13 +120,32 @@ export default class Calculator extends Component{
                 this.setState({values})//operands 
                 console.log("values: ",values)
             }    
+        }    
+    }
+
+    deleteDigit(){
+        if (this.state.displayValue=='0'|| this.state.displayValue.length==1 ){
+            this.clearMemory()
+            return
         }
-        
+        console.log("Digito deletado")
+        const currentDisplayValue = this.state.displayValue
+        const truncatedString = truncateString(currentDisplayValue,currentDisplayValue.length-1)
+        this.setState({displayValue:truncatedString})
 
         
+       
+        const i = this.state.currentValue
         
-        
+        const newValue = parseFloat(truncatedString)
+        console.log("new Value: ",newValue)
+        const values = [...this.state.values]//operands 
+        values[i] = newValue
+        this.setState({values})//operands 
+        console.log("new value: ",values[i])
+         console.log("Truncated Value: ",truncatedString)
     }
+    
     render(){
         
         const setOparation = operation => this.setOparation(operation)
@@ -137,7 +170,7 @@ export default class Calculator extends Component{
                     </div>
                     <div className="numbers-column">
                     
-                        <Button buttonClass="orange-label" label={deleteIcon} />
+                        <Button buttonClass="orange-label" label={deleteIcon} click={()=>this.deleteDigit()} />
                         <Button buttonClass="number" label="8" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="5" click={addDigitOnDisplay} />
                         <Button buttonClass="number" label="2" click={addDigitOnDisplay} />    

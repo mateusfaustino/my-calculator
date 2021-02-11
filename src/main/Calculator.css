@@ -70,6 +70,7 @@
     border-top: solid 0.5px #cccccccc;
     justify-content: space-between;
     align-items: flex-start;
+    padding-top: 15.5px;
 
 }
 .numbers-column{
